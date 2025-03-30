@@ -84,7 +84,3 @@ A Flask web app to collect and display cafes with power sockets, wifi, and good 
 - [ ] Add user authentication
 
 ---
-
-## 📄 License
-
-MIT — free to use, modify, and distribute.
