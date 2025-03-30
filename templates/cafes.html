@@ -1,0 +1,62 @@
+{% extends 'base.html' %}
+{% block title %}Restaurants{% endblock %}
+
+{% block content %}
+
+<div class="container">
+  <div class="row">
+    <div class="col-sm-12">
+
+      <h1>All Cafes</h1>
+<table class="table" style="color: black">
+  {% for row in cafes %}
+    <tr>
+      {% for key, item in row.items() if key!="id" %}
+        {% if key == "map_url" %}
+            <td><a href="{{ item }}" target="_blank">📍 Map</a></td>
+        {% elif key == "img_url" %}
+            <td><img src="{{ item }}" alt="Cafe Image" style="height: 100px;"></td>
+        {% elif key == "has_wifi" and item == True %}
+            <td><img src="/static/wifi.png" alt="wifi icon" style="height: 20px;"></td>
+        {% elif key == "can_take_calls" and item == True %}
+            <td><img src="/static/call.png" alt="call icon" style="height: 20px;"></td>
+        {% elif key == "has_toilet" and item == True %}
+            <td><img src="/static/toilet.png" alt="toilet icon" style="height: 20px;"></td>
+        {% elif key == "has_sockets" and item == True %}
+            <td><img src="/static/plug.png" alt="Plug icon" style="height: 20px;"></td>
+        {% elif key == "has_wifi" and item == False %}
+            <td><img src="/static/nowifi.png" alt="no wifi icon" style="height: 20px;"></td>
+        {% elif key == "can_take_calls" and item == False %}
+            <td><img src="/static/nocall.png" alt="no call icon" style="height: 20px;"></td>
+        {% elif key == "has_toilet" and item == False %}
+            <td><img src="/static/notoilet.png" alt="no toilet icon" style="height: 20px;"></td>
+        {% elif key == "has_sockets" and item == False %}
+            <td><img src="/static/noplug.png" alt="no Plug icon" style="height: 20px;"></td>
+        {% else %}
+           <td>{{ item }}</td>
+        {% endif %}
+      {% endfor %}
+
+      <!-- DELETE BUTTON at the end of the row -->
+      <td>
+        <form action="{{ url_for('delete_cafe', cafe_id=row['id']) }}" method="post" style="display:inline;">
+          <button type="submit" style="border: none; background: none; padding: 0;">
+            <img src="/static/delete.png" alt="delete icon" style="height: 20px;">
+          </button>
+        </form>
+      </td>
+    </tr>
+  {% endfor %}
+</table>
+      <p><a href="{{url_for('home')}}">Return to index page</a>
+          <a href="{{url_for('post_new_cafe')}}">Add a Cafe</a></p>
+
+
+</form>
+</p>
+
+    </div>
+  </div>
+</div>
+
+{% endblock %}
